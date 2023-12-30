@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    {% if items_to_display %}
+    <form method="post" action="{% url 'b' %}">
+        {% csrf_token %}
+        <p class="text-primary fw-bold">Date:</p>
+        <div class="mb-3">
+            <input type="date" class="form-control" name="date" required>
+        </div>
+        <p class="text-primary fw-bold">Bill No:</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="bno" required>
+        </div>
+        <p class="text-primary fw-bold">Sub:</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Subject Of Your Work" name="sub" required>
+        </div>
+        <hr class="bg-white">
+        <p class="text-primary fw-bold">To:</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Client/CustomerName" name="a1" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Doorno/Street" name="a2" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Area/District" name="a3" required>
+        </div>
+    {% for i in items_to_display %}
+    <p class="text-primary fw-bold">{{i}}</p>
+    {% include 'loc.html' %}
+    {% endfor %}
+    <p class="text-primary fw-bold">Total Amount :</p>
+        <div class="mb-3">
+            <input type="text" class="form-control"  placeholder="Please Provide The Total Amount" name="total" required>
+        </div>
+    <p class="text-primary fw-bold">Advance Paid Amount :</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="if no advance just leave this field" name="advance">
+        </div>
+    <p class="text-primary fw-bold">Balance Amount :</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="if no balance just leave this field" name="balance">
+        </div>
+    
+    <select name="nof" class="form-select bg-primary"  aria-label="Default select example">
+        <option selected>select</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        
+            
+    </select>
+    <center><button class="btn btn-primary" type="submit">Generate</button></center>
+    </form>
+    {% else %}
+    <h1 class="text-primary text-center">INVOICE</h1>
+    <form class="mt-3" method="post" action="{% url 'los2' %}">
+        {% csrf_token %}
+        <select name="option" class="form-select bg-primary"  aria-label="Default select example">
+            <option selected>List Of Contents</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            
+        </select>
+        <center><button class=" mt-3 btn btn-primary" type="submit">Done</button></center>
+    </form>
+    {% endif %}
+</div>
+
+{% endblock %}

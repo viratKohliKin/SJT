@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>INVOICE</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="col-md-6 offset-md-3 fw-bold contt">
+        <div><img class="w-100" src="../static/header.png"></div>
+        <div><p class="mb-0" style="padding-left: 340px;font-weight: bold;"><u>INVOICE</u><span style="padding-left: 180px;font-weight: bold;">DATE: {{d}} </span></p>
+        <p style="padding-left: 572px;">Invoice No : {{bno}} </p>
+        </div>    
+        <div>TO:
+            <span>{{a1}},</span>
+        </div>
+        <div>
+            <span style="padding-left: 28px">{{a2}},</span>
+        </div>
+        <div>
+            <span style="padding-left: 28px">{{a3}}.</span>
+        </div>
+        <br>
+        <div class="mt-1">SUB : <span>{{s}}.</span></div><br>
+        {% for i in nof %}
+            {% for data in combined_data %}
+                {% with a=data.a %}
+                {% with b=data.b %}
+                        {% include 'row.html' %}
+                {% endwith %}
+                {% endwith %}
+            {% endfor %}
+        {% endfor %}
+        {% if adv and ba %}
+        <div class="footer fixed-bottom">
+            <p class="mb-0" style="padding-left: 540px;margin-bottom: 50px;" >Total Amount  <span style="padding-left: 30px;">&rarr;</span><span style="padding-left: 30px;">{{tot}}</span></p>
+            <p  class="mb-0" style="padding-left: 540px;margin-bottom: 50px;" >Advance Amount  <span style="padding-left: 10px;">&rarr;</span><span style="padding-left: 27px;">{{adv}}</span>   </p>  
+            <p  style="padding-left: 540px;margin-bottom: 50px;" >Balance Amount  <span style="padding-left: 10px;">&rarr;</span><span style="padding-left: 30px;">{{ba}}</span>   </p>
+            <p class="text-center fw-bold">THANK YOU</p>
+        </div>
+        {% else %}
+        <div class="footer fixed-bottom">
+            <p style="padding-left: 540px;margin-bottom: 50px;" >Total Amount  <span style="padding-left: 30px;">&rarr;</span><span style="padding-left: 30px;">{{tot}}</span>   </p>  
+            <p class="text-center fw-bold">THANK YOU</p>
+        </div>
+        {% endif %}
+          
+        
+    </div>
+    <center><button class="btn btn-primary no-print" onclick="window.print()">print</button></center>
+    <style>
+        @media print {
+          .no-print {
+            display: none;
+          }
+
+        }
+        .contt{
+          font-size: smaller;
+        }
+        body{
+          page-break-inside: avoid;
+        }
+        /* .nt{
+            white-space: nowrap;
+        } */
+        .ino{
+            margin: 0;
+            padding: 0;
+        }
+      </style>
+      <script>
+        
+      </script>
+
+</body>
