@@ -12,7 +12,11 @@ urlpatterns = [
    path('los2/',views.los2,name='los2'),
    path('vi/',views.quote,name='q'),
    path('vi2/',views.bill,name='b'),
-
-
-
+   path('history/',views.history,name='history'),
+   path('updatequote/<int:id>',views.updatequote,name='updatequote'),
+   path('updatequotedata/',views.updatequotedata,name='updatequotedata'),
+   path('updatebill/<int:id>',views.updatebill,name='updatebill'),
+   path('updatebilldata/',views.updatebilldata,name='updatebilldata'),
+   path('deletequote/<int:id>',views.deletequote,name='deletequote'),
+   path('deletebill/<int:id>',views.deletebill,name='deletebill'),
 ]

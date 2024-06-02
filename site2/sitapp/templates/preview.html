@@ -1,17 +1,16 @@
 <!doctype html>
-{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>QUOTATION</title>
-
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   </head>
   <body>
     <div class="col-md-6 offset-md-3 fw-bold contt">
-        <div><img class="w-100" src="{% static 'header.png' %}"></div>
-        <div><p style="padding-left: 340px;font-weight: bold;"><u>QUOTATION</u><span style="padding-left: 180px;font-weight: bold;">DATE:{{d}}</span></p></div>
+        <div><img class="w-100" src="../static/header.png"></div>
+        <div><p style="padding-left: 340px;font-weight: bold;"><u>QUOTATION</u><span style="padding-left: 180px;font-weight: bold;">DATE:{{d}}</span></p></div>    
         <div>TO:
             <span>{{a1}}</span>
         </div>
@@ -33,11 +32,12 @@
             {% endfor %}
         {% endfor %}
         <div class="footer fixed-bottom">
+                <p class="mb-5" style="padding-left: 540px;margin-bottom: 50px;" >Total Amount  <span style="padding-left: 30px;">&rarr;</span><span style="padding-left: 30px;">{{total}}</span></p>
                 <p>{{adet}}</p>
                 <p><u>NOTE</u>: A GOOD SERVICE WILL BE PROVIDED.</p>
         </div>
-
-
+          
+        
     </div>
     <center><button class="btn btn-primary no-print" onclick="window.print()">print</button></center>
     <style>
@@ -55,12 +55,7 @@
         }
       </style>
       <script>
-      window.onload = function(){
-        setTimeout(function(){
-            window.location.href = 'https://jaferali.pythonanywhere.com/logout';
-        },60000);
-    };
-
+        
       </script>
 
 </body>

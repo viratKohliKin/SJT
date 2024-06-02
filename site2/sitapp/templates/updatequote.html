@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    {% if id %}
+    <form method="post" action="{% url 'updatequotedata' %}">
+        {% for a in gendata %}
+        {% csrf_token %}
+        <p class="text-primary fw-bold">Date:</p>
+        <div class="mb-3">
+            {% with formatted_date=a.1|date:'Y-m-d' %}
+            <input type="date" class="form-control" name="date" value="{{formatted_date}}" required>
+            {% endwith %}
+        </div>
+        <p class="text-primary fw-bold">Sub:</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Subject Of Your Work" value="{{a.2}}" name="sub" required>
+        </div>
+        <hr class="bg-white">
+        <p class="text-primary fw-bold">To:</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Client/CustomerName" name="a1" value="{{a.3}}" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Doorno/Street" name="a2" value="{{a.4}}" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Area/District" name="a3" value="{{a.5}}" required>
+        </div>
+        <input type="hidden"  name="qid" value="{{a.0}}">
+        {% for i in genlistdata %}
+        <p class="text-primary fw-bold">{{ forloop.counter }}</p>
+        <div class="mb-1">
+            <input type="text" class="form-control" placeholder="DESCRIPTION" name="desc[]" value="{{ i.2 }}" required>
+        </div>
+        <div class="mb-1">
+            <input type="text" class="form-control" placeholder="AMOUNT" name="amount[]" value="{{ i.3 }}" required>
+        </div>
+        <input type="hidden"  name="qlid[]" value="{{i.1}}">
+        <hr class="bg-white">
+        {% endfor %}
+        <p class="text-primary fw-bold">Total Amount:</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="totalamount" name="totalamount"  value="{{a.7}}" required>
+        </div>
+        <p class="text-primary fw-bold">Additional Details</p>
+        <div class="mb-3">
+        <input type="text" class="form-control" placeholder="like including painting material,transportation" name="adet" value="{{a.6}}">
+        {% endfor %}
+        <select name="nof" class="form-select bg-primary"  aria-label="Default select example">
+            <option selected>{{items}}</option>
+        </select>
+        <center><button class="btn btn-primary" type="submit">Re-Generate</button></center>
+        </div>
+    </form>
+    
+    {% endif %}
+</div>
+
+{% endblock %}

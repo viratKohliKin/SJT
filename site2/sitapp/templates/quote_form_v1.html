@@ -27,6 +27,10 @@
     <p class="text-primary fw-bold">{{i}}</p>
     {% include 'loc.html' %}
     {% endfor %}
+    <p class="text-primary fw-bold">Total Amount:</p>
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="totalamount" name="totalamount" required>
+    </div>
     <p class="text-primary fw-bold">Additional Details</p>
     <div class="mb-3">
         <input type="text" class="form-control" placeholder="like including painting material,transportation" name="adet">
@@ -46,7 +50,7 @@
     <h1 class="text-primary text-center">QUOTATION</h1>
     <form class="mt-3" method="post" action="{% url 'los' %}">
         {% csrf_token %}
-        <select name="option" class="form-select bg-primary"  aria-label="Default select example">
+        <select name="option" class="form-select bg-primary"  aria-label="Default select example" required>
             <option selected>List Of Contents</option>
             <option>1</option>
             <option>2</option>

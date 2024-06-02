@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    {% if id %}
+    <form method="post" action="{% url 'updatebilldata' %}">
+        {% for i in gendata %}
+        {% csrf_token %}
+        <p class="text-primary fw-bold">Date:</p>
+        <div class="mb-3">
+            {% with formatted_date=i.1|date:'Y-m-d' %}
+            <input type="date" class="form-control" name="date" value="{{formatted_date}}" required>
+            {% endwith %}
+        </div>
+        <p class="text-primary fw-bold">Bill No:</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="bno"  value={{i.9}} required>
+        </div>
+        <p class="text-primary fw-bold">Sub:</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Subject Of Your Work" value="{{i.2}}" name="sub" required>
+        </div>
+        <hr class="bg-white">
+        <p class="text-primary fw-bold">To:</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Client/CustomerName" name="a1" value="{{i.3}}" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Doorno/Street" name="a2" value="{{i.4}}" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Area/District" name="a3" value="{{i.5}}" required>
+        </div>
+        <input type="hidden"  name="bid" value="{{i.0}}">
+        {% for a in genlistdata %}
+        <p class="text-primary fw-bold">{{ forloop.counter }}</p>
+        <div class="mb-1">
+            <input type="text" class="form-control" placeholder="DESCRIPTION" name="desc[]" value="{{ a.2 }}" required>
+        </div>
+        <div class="mb-1">
+            <input type="text" class="form-control" placeholder="AMOUNT" name="amount[]" value="{{ a.3 }}" required>
+        </div>
+        <input type="hidden"  name="blid[]" value="{{a.1}}">
+        <hr class="bg-white">
+        {% endfor %}
+        <p class="text-primary fw-bold">Total Amount:</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="totalamount" name="totalamount"  value="{{i.6}}" required>
+        </div>
+        <p class="text-primary fw-bold">Advance Paid Amount :</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="if no advance just leave this field" name="advance" value="{{i.7}}">
+        </div>
+        <p class="text-primary fw-bold">Balance Amount :</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="if no balance just leave this field" name="balance" value="{{i.8}}">
+        </div>
+        {% endfor %}
+        <select name="nof" class="form-select bg-primary"  aria-label="Default select example">
+            <option selected>{{items}}</option>
+        </select>
+        <center><button class="btn btn-primary" type="submit">Re-Generate</button></center>
+        </div>
+    </form>
+    
+    {% endif %}
+</div>
+
+{% endblock %}
